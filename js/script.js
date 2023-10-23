@@ -55,6 +55,5 @@ for (let i = 0; i < team.length; i++){
   <h5>${member.role}</h5>
   </div>
   `
-
   cards.innerHTML += card;
 }
