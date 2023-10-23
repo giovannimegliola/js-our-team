@@ -42,18 +42,45 @@ for (let key in team) {
   console.log (team[key].name + " " + team[key].role + " " + team[key].picture);
 }
 
-const cards = document.getElementById("cardsContainer");
 
-for (let i = 0; i < team.length; i++){
+addMember();
 
-  let member = team[i];
+// aggiunta di un nuovo membro al click
 
-  let card = ` 
-  <div class="card">
-  <img src="./img/${member.picture}"></img>
-  <h3>${member.name}</h3>
-  <h5>${member.role}</h5>
-  </div>
-  `
-  cards.innerHTML += card;
+document.getElementById("addMemberButton").addEventListener("click", function() {
+  const name = document.getElementById("nameInput").value;
+  const role = document.getElementById("roleInput").value;
+  const picture = document.getElementById("pictureInput").value;
+
+  if (name && role && picture) {
+    
+    const newMember = { name, role, picture };  // creo un nuovo membro 
+
+    team.push(newMember);
+
+    addMember();
+
+    document.getElementById("nameInput").value = "";
+    document.getElementById("roleInput").value = "";           //reset
+    document.getElementById("pictureInput").value = "";
+  }
+});
+
+function addMember() {
+  const cards = document.getElementById("cardsContainer");
+  cards.innerHTML = "";  //reset
+
+  for (let i = 0; i < team.length; i++) {
+    let member = team[i];
+
+    let card = `
+    <div class="card">
+      <img src="./img/${member.picture}" alt="${member.name}"></img>
+      <h3>${member.name}</h3>
+      <h5>${member.role}</h5>
+    </div>
+    `;
+
+    cards.innerHTML += card;
+  }
 }
